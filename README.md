@@ -45,7 +45,11 @@ $$$.init()
 
 And then in your CLI:
 
-`node app.js -c`
+`node app.js`
+
+Optionally, you can add `-c your_command_name`, like this:
+ 
+`node app.js -c prod` (see options below)
 
 You should then see some output indicating the Express server started.
 
