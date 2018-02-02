@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Pierre Chamberlain",
   "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/bigp/bigp-globals.git"
+  },
   "dependencies": {
     "anymatch": "^2.0.0",
     "async": "^2.6.0",
