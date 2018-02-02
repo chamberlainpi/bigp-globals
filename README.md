@@ -35,12 +35,32 @@ To get started, install it via `npm install @bigp/bigp-globals`
 Once npm does its funky thing, you can start your app with a simple `app.js` file containing something like this:
 
 ```javascript
+// Example in file "app.js"
 const $$$ = require('bigp-globals');
 
 $$$.init()
   .then(status => trace(`Command returned: ${status}`.yellow))
   .catch(err => traceError(err));
 ```
+
+And then in your CLI:
+
+`node app.js -c`
+
+You should then see some output indicating the Express server started.
+
+Congrats!
+
+What's happening exactly?
+----------------------------------
+ 
+ A *"Master cluster"* process starts up.
+ It then loops every few milliseconds to ensure a child-process is running your actual webapp (express, socket.io, etc).
+ 
+ This ensures that whenever the child-process kills itself (:running_man::gun: how dark!) from a server-side file modification, the Master process simply relaunches it immediately.
+ 
+ The *File-Watcher* system is also responsible for differentiating between modifications applied to server-side, front-end JS, CSS, media files, and webpacked source files to notify and/or kill the respective event or process.
+ This way, whenever possible, it attempts to `hot-reload` dynamic resources (ex: CSS stylesheets) without doing a full page-refresh.  
 
 Options
 -------
