@@ -13,18 +13,12 @@ bigp-globals
 
 This module basically sits in the background and provides a quick, effortless way to make WebApps.
 
-Launch the 'localhost:3333' URL in your default browser when starting? :heavy_check_mark: 
-
-Present a User-Friendly startup guide on first launch? :heavy_check_mark:
-
-Hot-Reload on server & client code changes? :heavy_check_mark:
-
-Serve files directly from your `/public` folder? :heavy_check_mark:
-
-Compile front-end files with Webpack? :heavy_check_mark:
-
-Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies? :heavy_check_mark: :heavy_check_mark: :heavy_check_mark:
-
+ - Launch the 'localhost:3333' URL in your default browser when starting? :heavy_check_mark:
+ - Present a User-Friendly startup guide on first launch? :heavy_check_mark:
+ - Hot-Reload on server & client code changes? :heavy_check_mark:
+ - Serve files directly from your `/public` folder? :heavy_check_mark:
+ - Compile front-end files with Webpack? :heavy_check_mark:
+ - Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies? :heavy_check_mark: :heavy_check_mark: :heavy_check_mark:
 
 Why?
 ----
