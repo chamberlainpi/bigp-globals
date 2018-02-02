@@ -6,9 +6,11 @@ const app = express();
 
 const SELF = {
 	init($$$) {
+		$$$.server = SELF;
+
 		const opts = SELF.opts = $$$.opts.server || {};
 
-		if(opts.helloWorld) app.get('/', (req, res) => res.send('Hello World!'));
+		if(opts.isHelloWorld) app.get('/', (req, res) => res.send('Hello World!'));
 
 		app.get('/', express.static($$$.paths.public));
 		app.get('/', express.static($$$.paths.internal.public));
