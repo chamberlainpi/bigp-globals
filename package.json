@@ -1,6 +1,6 @@
 {
   "name": "bigp-globals",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A fairly light, reusable and extendable scaffolding module for WebApps.",
   "main": "index.js",
   "author": "Pierre Chamberlain",
