@@ -13,12 +13,15 @@ bigp-globals
 
 This module basically sits in the background and provides a quick, effortless way to make WebApps.
 
- - Want to automatically open the 'localhost:3333' URL in your default browser when starting (only when necessary)? :heavy_check_mark:
- - Present a User-Friendly startup guide on first launch? :heavy_check_mark:
- - Hot-Reload on server & client code changes? :heavy_check_mark:
- - Serve files directly from your `/public` folder? :heavy_check_mark:
- - Compile front-end files with Webpack? :heavy_check_mark:
- - Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies? :heavy_check_mark: :heavy_check_mark: :heavy_check_mark:
+| Features | Included |
+| --- | --- |
+| Want to automatically open the 'localhost:3333' URL in your default browser when starting (only when necessary)? | :heavy_check_mark: | 
+| Present a User-Friendly startup guide on first launch? | :heavy_check_mark: |
+| Hot-Reload on server & client code changes? | :heavy_check_mark: |
+| Serve files directly from your `/public` folder? | :heavy_check_mark: |
+| Compile front-end files with Webpack? | :heavy_check_mark: |
+| Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies? | :heavy_check_mark::heavy_check_mark::heavy_check_mark:<br/>:heavy_check_mark::heavy_check_mark::heavy_check_mark: |
+| Will this cause me headaches? | :x: | 
 
 Why?
 ----
@@ -69,9 +72,9 @@ What's happening exactly?
 Options
 -------
 
-You can configure the module by passing an **options** object to the `init({...})` method. Here is a list of what you can modify:
+You can configure the module by passing an **options** object to the `init({...})` method.
 
-**Example**
+**Example:**
 ```javascript
 $$$.init({
   /////////// Yargs config:
