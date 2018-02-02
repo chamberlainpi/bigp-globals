@@ -15,10 +15,10 @@ This module basically sits in the background and provides a quick, effortless wa
 
 | Features | Included |
 | --- | --- |
-| Want to automatically open the 'localhost:3333' URL in your default browser when starting (only when necessary)? | :heavy_check_mark: | 
-| Present a User-Friendly startup guide on first launch? | :heavy_check_mark: |
+| Want to automatically open the 'localhost:3333' URL in your default browser when starting?<br/>(only when necessary / if not already opened) | :heavy_check_mark: | 
+| Present a User-Friendly startup guide on first launch in browser? | :heavy_check_mark: |
 | Hot-Reload on server & client code changes? | :heavy_check_mark: |
-| Serve files directly from your `/public` folder? | :heavy_check_mark: |
+| Serve JS, CSS, media files directly from your `/public` folder? | :heavy_check_mark: |
 | Compile front-end files with Webpack? | :heavy_check_mark: |
 | Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies? | :heavy_check_mark::heavy_check_mark::heavy_check_mark:<br/>:heavy_check_mark::heavy_check_mark::heavy_check_mark: |
 | Will this cause me headaches? | :x: | 
@@ -50,9 +50,9 @@ And then in your CLI:
 
 `node app.js`
 
-Optionally, you can add `-c your_command_name`, like this:
+Optionally, you can specify a command, like this:
  
-`node app.js -c prod` (see options below)
+`node app.js -c prod` *(see options below)*
 
 You should then see some output indicating the Express server started.
 
@@ -77,7 +77,7 @@ You can configure the module by passing an **options** object to the `init({...}
 **Example:**
 ```javascript
 $$$.init({
-  /////////// Yargs config:
+  /////////// Yargs command-line config:
   version: '2018.1.0',
   defaultCmd: 'auto',
   commands: {
@@ -104,18 +104,18 @@ $$$.init({
 ```
 
 Here's the list of available options:
- - `noConflict` (Boolean, default=false) Prevents polluting the global-scope if true (will only write to `$$$.globals`).
- - `version`: (String) When starting the app from the command-line, using `-v` will display this version string.
- - `defaultCmd`: (String, default=auto) The default command to call in your list of commands when no command parameter is specified in the CLI `-c` (if no `commands` functions are provided, just uses the `built-in` one).
- - `commands`: (Object of functions) Provide a list of commands to perform custom startup processes depending on the `-c "command"` specified in the CLI.
+ - `noConflict` *(Boolean, default=false)* Prevents polluting the global-scope if true (will only write to `$$$.globals`).
+ - `version`: *(String)* When starting the app from the command-line, using `-v` will display this version string.
+ - `defaultCmd`: *(String, default=auto)* The default command to call in your list of commands when no command parameter is specified in the CLI `-c` (if no `commands` functions are provided, just uses the `built-in` one).
+ - `commands`: *(Object of functions)* Provide a list of commands to perform custom startup processes depending on the `-c "command"` specified in the CLI.
  - `server`: **Express and Socket.IO config:**
-   - `port`: (Number, default=3333) The port to listen on the Express web server.
-   - `delay`: (Number, default=250) Milliseconds to wait before auto-starting the server.
-   - `isAutoStart`: (Boolean, default=true) Tells the server to start immediately. If you need to configure other server-related parts of your app manually, you can set this to `false` and call `$$$.server.start()` after your setup code.
-   - `isHelloWorld`: (Boolean, default=false) Serves a "Hello World" string on the root `/` URL.
+   - `port`: *(Number, default=3333)* The port to listen on the Express web server.
+   - `delay`: *(Number, default=250)* Milliseconds to wait before auto-starting the server.
+   - `isAutoStart`: *(Boolean, default=true)* Tells the server to start immediately. If you need to configure other server-related parts of your app manually, you can set this to `false` and call `$$$.server.start()` after your setup code.
+   - `isHelloWorld`: *(Boolean, default=false)* Serves a "Hello World" string on the root `/` URL.
    
  - `watcher`: **Chokidar file-watcher config:**
-   - `dir`: (String, default=...) Path of root-folder to detect file modifications. By default, the root is your web-app's project directory.
+   - `dir`: *(String, default=...)* Path of root-folder to detect file modifications. By default, the root is your web-app's project directory.
 
 
 > Hmm, I don't like the idea of polluting the global-scope.<br/>
