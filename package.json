@@ -1,7 +1,7 @@
 {
   "name": "bigp-globals",
-  "version": "1.0.0",
-  "description": "My default globals / startup vars & functions.",
+  "version": "1.0.1",
+  "description": "A fairly light, reusable and extendable scaffolding module for WebApps.",
   "main": "index.js",
   "author": "Pierre Chamberlain",
   "license": "MIT",
