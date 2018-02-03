@@ -5,24 +5,23 @@
 const chokidar = require('chokidar');
 const anymatch = require('anymatch');
 const hasPublic = p => p.has('public');
-const watchers = [];
+const watchHandlers = [];
 const config = {
 	ignored: [/node_modules/, /package\.json/, /\.(git|idea|private|gitignore|lock)/] // /(^|[\/\\])\../,
 };
 
-const SELF = {
+let SELF;
+module.exports = SELF = {
 	init($$$) {
 		const opts = $$$.opts.watcher || {};
 		if(!opts.dir) opts.dir = $$$.paths.dir || '.';
-
-		trace("FILE-WATCHER: ".yellow + opts.dir);
 
 		SELF.watcher = chokidar.watch(opts.dir, config);
 		SELF.watcher.on('all', (event, path) => {
 			path = path.fixSlash();
 
-			watchers.forEach(w => {
-				var isEventOK = w.event==='*' || w.event===event;
+			watchHandlers.forEach(w => {
+				const isEventOK = w.event==='*' || w.event===event;
 				if(!isEventOK || !w.matcher(path)) return;
 				w.cb(path);
 			});
@@ -30,14 +29,11 @@ const SELF = {
 
 		SELF.add(/\./, path => {
 			if(hasPublic(path)) {
-				//TODO:
-				// REPLACE opts by $$$, pass that object around instead!!!!
+				$$$.io.emit('file-changed', path);
 			} else {
 				process.kill(process.pid);
 			}
 		});
-
-		return this;
 	},
 
 	add(pattern, event, cb) {
@@ -46,8 +42,6 @@ const SELF = {
 			event = 'change'
 		}
 
-		watchers.push({matcher: anymatch(pattern), event: event, cb: cb})
+		watchHandlers.push({matcher: anymatch(pattern), event: event, cb: cb})
 	}
 };
-
-module.exports = SELF;

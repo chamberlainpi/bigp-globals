@@ -1,13 +1,40 @@
 require('colors');
 const _ = require('lodash');
 const cluster = require('cluster');
-const svYargs = require('./libs/sv-yargs');
-const svExpress = require('./libs/sv-express');
-const svWatcher = require('./libs/sv-watcher');
 
 const trace = console.log.bind(console);
 const traceClear = function() { process.stdout.write('\033c'); };
 const traceError = function(err) { trace(err.toString().red); };
+
+const mods = {};
+mods.crypto = require('crypto');
+mods.events = require('events');
+mods.anymatch = require('anymatch');
+mods.async = require('async');
+mods.chokidar = require('chokidar');
+mods.changeCase = require('change-case');
+mods.chai = require('chai');
+mods.mocha = require('mocha');
+mods.morgan = require('morgan');
+mods.fs = require('fs-extra');
+mods.fsMem = require('memory-fs');
+mods.express = require('express');
+mods.expressSession = require('express-session');
+mods.cors = require('cors');
+mods.mkdirp = require('mkdirp');
+mods.moment = require('moment');
+mods.request = require('request-promise');
+mods.socketIO = require('socket.io');
+mods.webpack = require('webpack');
+mods.yargs = require('yargs');
+
+const internalMods = [
+	mods.svYargs = require('./libs/sv-yargs'),
+	mods.svExpress = require('./libs/sv-express'),
+	mods.svWatcher = require('./libs/sv-watcher'),
+	mods.svSocketIO = require('./libs/sv-socket-io'),
+	mods.svAutoOpen = require('./libs/sv-auto-open'),
+];
 
 let isStarted = false;
 
@@ -17,32 +44,8 @@ const $$$ = {
 		$$$.opts = opts;
 
 		const globals = $$$.globals = {};
-		const mods = globals.mods = {};
-
-		// Requires:
 		globals._ = _;
-		mods.crypto = require('crypto');
-		mods.events = require('events');
-		mods.anymatch = require('anymatch');
-		mods.async = require('async');
-		mods.chokidar = require('chokidar');
-		mods.changeCase = require('change-case');
-		mods.chai = require('chai');
-		mods.mocha = require('mocha');
-		mods.morgan = require('morgan');
-		mods.fs = require('fs-extra');
-		mods.fsMem = require('memory-fs');
-		mods.express = require('express');
-		mods.expressSession = require('express-session');
-		mods.cors = require('cors');
-		mods.mkdirp = require('mkdirp');
-		mods.moment = require('moment');
-		mods.request = require('request-promise');
-		mods.socketIO = require('socket.io');
-		mods.webpack = require('webpack');
-		mods.yargs = require('yargs');
-
-		// Log:
+		globals.mods = $$$.mods = mods;
 		globals.trace = trace;
 		globals.traceClear = traceClear;
 		globals.traceError = traceError;
@@ -50,7 +53,6 @@ const $$$ = {
 		if(!opts.noConflict) _.extend(global, globals);
 		else trace("*noConflict* mode, use $$$.globals & $$$.globals.mods instead");
 
-		//Some handy extensions built-in types:
 		require('./libs/extensions');
 
 		$$$.paths = require('./libs/sv-paths');
@@ -58,9 +60,7 @@ const $$$ = {
 		return new Promise((_then, _catch) => {
 			if(cluster.isMaster) return $$$.loopMasterProcess();
 
-			$$$.app = svExpress.init($$$);
-			$$$.watcher = svWatcher.init($$$);
-			$$$.argv = svYargs.init($$$);
+			internalMods.forEach(mod => mod.init($$$));
 
 			let cmd;
 			if(opts.commands) {
@@ -94,7 +94,10 @@ const $$$ = {
 
 		cluster.on('exit', (worker, code, signal) => {
 			trace(`Worker ${worker.process.pid} died.`);
-			persistent = null;
+			setTimeout(() => {
+				persistent = null;
+			}, 1000);
+
 		});
 
 		loop();
@@ -104,28 +107,5 @@ const $$$ = {
 		return 'built-in';
 	}
 };
-
-// const COMMANDS = {
-// 	auto() {
-// 		return process.env.NODE_ENV==='prod' ?
-// 			COMMANDS.prod() : COMMANDS.dev();
-// 	},
-//
-// 	dev() {
-// 		return 'dev';
-// 	},
-//
-// 	prod() {
-// 		return 'prod';
-// 	},
-//
-// 	test() {
-// 		return 'test';
-// 	},
-//
-// 	xp() {
-// 		return 'xp';
-// 	}
-// };
 
 module.exports = $$$;

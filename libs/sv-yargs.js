@@ -7,7 +7,7 @@ module.exports = {
 	init($$$) {
 		const opts = $$$.opts;
 
-		return yargs
+		$$$.argv = yargs
 			.version(opts.version || '1.0.0')
 			.help('help')
 			.alias('c', 'command')
