@@ -6,8 +6,7 @@ const moment = require('moment');
 const MAX_TIME_TO_OPEN = 2500;
 let lastChecked = moment();
 
-let SELF;
-module.exports = SELF = {
+const SELF = module.exports = {
 	init($$$) {
 		SELF.url = 'http://localhost:' + $$$.server.opts.port;
 		SELF.io = $$$.io;

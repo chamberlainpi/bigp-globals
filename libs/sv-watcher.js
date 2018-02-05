@@ -10,8 +10,7 @@ const config = {
 	ignored: [/node_modules/, /package\.json/, /\.(git|idea|private|gitignore|lock)/] // /(^|[\/\\])\../,
 };
 
-let SELF;
-module.exports = SELF = {
+const SELF = module.exports = {
 	init($$$) {
 		const opts = $$$.opts.watcher || {};
 		if(!opts.dir) opts.dir = $$$.paths.dir || '.';

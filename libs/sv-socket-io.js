@@ -5,8 +5,7 @@ const socketIO = require('socket.io');
 const sockets = [];
 const handlers = [];
 
-let SELF;
-module.exports = SELF = {
+const SELF = module.exports = {
 	init($$$) {
 		const io = $$$.io = socketIO($$$.http);
 

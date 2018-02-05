@@ -5,8 +5,7 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 
-let SELF;
-module.exports = SELF = {
+const SELF = module.exports = {
 	init($$$) {
 		$$$.server = SELF;
 		$$$.http = http;
@@ -22,7 +21,7 @@ module.exports = SELF = {
 		app.get('/js/extensions.js', SELF.serveFile(__dirname + '/extensions.js'));
 
 		if(opts.isAutoStart!==false) {
-			const delay = opts.delay || 250;
+			const delay = opts.delay || 1;
 			trace(`Auto-Starting server in ${delay}ms ...`);
 
 			setTimeout(SELF.start, delay);

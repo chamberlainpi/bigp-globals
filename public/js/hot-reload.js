@@ -23,7 +23,13 @@ $$$.io.on('file-changed', path => {
 	var ext = path.split('.').pop().toLowerCase();
 
 	switch(ext) {
+		case 'ts':
+		case 'less':
+		case 'sass': break;
 		case 'css':
+			$('link[hot-reload]').each((i, link) => {
+				link.href = link.href.split('?')[0] + "?id=" + $$$.randID();
+			});
 			break;
 		default:
 			window.location.reload(true);

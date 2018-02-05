@@ -26,3 +26,11 @@ _.extend(Array.prototype, {
 		return true;
 	}
 });
+
+var $$$ = $$$ || {};
+
+_.extend($$$, {
+	randID() {
+		return new Date().getTime().toString(36);
+	}
+});

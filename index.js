@@ -38,7 +38,7 @@ const internalMods = [
 
 let isStarted = false;
 
-const $$$ = {
+const $$$ = module.exports = {
 	init(opts) {
 		if(!opts) opts = {};
 		$$$.opts = opts;
@@ -89,15 +89,12 @@ const $$$ = {
 				persistent = cluster.fork();
 			}
 
-			setTimeout(loop, 250);
+			setTimeout(loop, 100);
 		}
 
 		cluster.on('exit', (worker, code, signal) => {
 			trace(`Worker ${worker.process.pid} died.`);
-			setTimeout(() => {
-				persistent = null;
-			}, 1000);
-
+			persistent = null;
 		});
 
 		loop();
@@ -107,5 +104,3 @@ const $$$ = {
 		return 'built-in';
 	}
 };
-
-module.exports = $$$;
