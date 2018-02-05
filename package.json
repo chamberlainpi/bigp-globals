@@ -1,13 +1,13 @@
 {
   "name": "bigp-globals",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A fairly light, reusable and extendable scaffolding module for WebApps.",
   "main": "index.js",
   "author": "Pierre Chamberlain",
   "license": "MIT",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/bigp/bigp-globals.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bigp/bigp-globals.git"
   },
   "dependencies": {
     "anymatch": "^2.0.0",
@@ -22,10 +22,12 @@
     "express-session": "^1.15.6",
     "fs-extra": "^5.0.0",
     "lodash": "^4.17.4",
+    "mime-types": "^2.1.17",
     "mkdirp": "^0.5.1",
     "mocha": "^5.0.0",
     "moment": "^2.20.1",
     "morgan": "^1.9.0",
+    "node-sass": "^4.7.2",
     "opn": "^5.2.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",

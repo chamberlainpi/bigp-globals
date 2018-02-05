@@ -25,6 +25,7 @@ $$$.io.on('file-changed', path => {
 	switch(ext) {
 		case 'ts':
 		case 'less':
+		case 'scss':
 		case 'sass': break;
 		case 'css':
 			$('link[hot-reload]').each((i, link) => {

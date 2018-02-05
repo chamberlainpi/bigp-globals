@@ -13,6 +13,10 @@ _.extend(String.prototype, {
 	fixSlash() {
 		return this.replace(/\\/g, '/');
 	},
+	toPath() {
+		var split = this.split('/');
+		return { filename: split.pop(), dir: split.join('/') };
+	}
 });
 
 _.extend(Array.prototype, {

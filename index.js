@@ -27,6 +27,7 @@ mods.request = require('request-promise');
 mods.socketIO = require('socket.io');
 mods.webpack = require('webpack');
 mods.yargs = require('yargs');
+mods.MFS = require('memory-fs');
 
 const internalMods = [
 	mods.svYargs = require('./libs/sv-yargs'),
@@ -34,11 +35,14 @@ const internalMods = [
 	mods.svWatcher = require('./libs/sv-watcher'),
 	mods.svSocketIO = require('./libs/sv-socket-io'),
 	mods.svAutoOpen = require('./libs/sv-auto-open'),
+	mods.svSassCompile = require('./libs/sv-sass-compile')
 ];
 
 let isStarted = false;
 
 const $$$ = module.exports = {
+	memFS: new mods.MFS(),
+
 	init(opts) {
 		if(!opts) opts = {};
 		$$$.opts = opts;
@@ -93,8 +97,13 @@ const $$$ = module.exports = {
 		}
 
 		cluster.on('exit', (worker, code, signal) => {
-			trace(`Worker ${worker.process.pid} died.`);
-			persistent = null;
+			trace(`Worker ${worker.process.pid} died (code ${code})`);
+
+			if(code > 0 && $$$.opts.isSlowRefresh) {
+				setTimeout(() => persistent = null, 2000);
+			}  else {
+				persistent = null;
+			}
 		});
 
 		loop();

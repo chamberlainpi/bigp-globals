@@ -1,12 +1,14 @@
 /**
  * Created by Chamberlain on 2/2/2018.
  */
+const mime = require('mime-types');
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 
 const SELF = module.exports = {
 	init($$$) {
+		SELF.$$$ = $$$;
 		$$$.server = SELF;
 		$$$.http = http;
 		$$$.app = app;
@@ -16,6 +18,7 @@ const SELF = module.exports = {
 		if(!opts.port) opts.port = 3333;
 		if(opts.isHelloWorld) app.get('/', (req, res) => res.send('Hello World!'));
 
+		app.get('/*', SELF.serveMemoryFile);
 		app.get('/*', express.static($$$.paths.public));
 		app.get('/*', express.static($$$.paths.internal.public));
 		app.get('/js/extensions.js', SELF.serveFile(__dirname + '/extensions.js'));
@@ -26,6 +29,30 @@ const SELF = module.exports = {
 
 			setTimeout(SELF.start, delay);
 		}
+	},
+
+	serveMemoryFile(req, res, next) {
+		let usedMP = false;
+		const url = req.url.split('?')[0];
+		const $$$ = SELF.$$$;
+		const memPaths = [
+			$$$.paths.public + url,
+			$$$.paths.internal.public + url
+		];
+
+		memPaths.forEach(mp => {
+			if(usedMP || !mp.split('/').pop().has('.') || !$$$.memFS.existsSync(mp)) return;
+
+			usedMP = true;
+
+			const mimeType = mime.lookup(mp);
+			trace("MIME: " + mimeType);
+
+			res.contentType(mimeType);
+			res.send($$$.memFS.readFileSync(mp));
+		});
+
+		if(!usedMP) next();
 	},
 
 	serveFile(filename) {
