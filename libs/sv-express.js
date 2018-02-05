@@ -45,10 +45,7 @@ const SELF = module.exports = {
 
 			usedMP = true;
 
-			const mimeType = mime.lookup(mp);
-			trace("MIME: " + mimeType);
-
-			res.contentType(mimeType);
+			res.contentType(mime.lookup(mp));
 			res.send($$$.memFS.readFileSync(mp));
 		});
 

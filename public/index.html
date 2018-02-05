@@ -12,6 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/EaselJS/1.0.2/easeljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.8/howler.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./js/extensions.js"></script>
     <script src="./js/main.js"></script>
@@ -20,13 +22,16 @@
 <body>
 
 <div id="app">
-    <div id="header">
+    <div class="header">
         <h1>Welcome to the WebApp Setup!</h1>
     </div>
-    <div id="page">
-        <p>
-            To get started, place an "index.html" file in your /public/ directory.
-        </p>
+    <div class="page md">
+        <span>
+            To get started, place an ***index.html*** file in your `/public/` directory.
+
+            **Or**, press this button to copy a template to your project.
+        </span>
+        <input type="button" onclick="$$$.copyProjectTemplate()" value="Copy Project Template"/>
     </div>
 </div>
 
