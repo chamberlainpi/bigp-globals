@@ -12,14 +12,14 @@ const SELF = module.exports = {
 		io.on('connection', socket => {
 			sockets.push(socket);
 
-			trace("Connected: ".yellow + socket.id);
+			//trace("Connected: ".yellow + socket.id);
 
 			SELF.applyHandlers(socket);
 
 			socket.on('disconnect', () => {
 				sockets.remove(socket);
 
-				trace("Disconnected: ".red + socket.id);
+				//trace("Disconnected: ".red + socket.id);
 			});
 		});
 	},

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="./css/styles.css" hot-reload="1">
+    <link rel="stylesheet" href="./css/defaults.css" hot-reload="1">
     <script> var $$$ = {}; </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
@@ -14,28 +14,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/extensions.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="./js/hot-reload.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 </head>
 <body>
-
-<div id="app">
-    <div class="header">
-        <h1>Welcome to the WebApp Setup!</h1>
-    </div>
-    <div class="page md">
-        <span>
-            To get started, place an ***index.html*** file in your `/public/` directory.
-
-            **Or**, press this button to copy a template to your project.
-        </span>
-        <input type="button" onclick="$$$.copyProjectTemplate()" value="Copy Project Template"/>
-    </div>
-</div>
-
-
-
+    <div id="app"></div>
+    <script src="./bundle.js"></script>
 </body>
 </html>

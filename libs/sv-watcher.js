@@ -4,7 +4,7 @@
 
 const chokidar = require('chokidar');
 const anymatch = require('anymatch');
-const hasPublic = p => p.has('public');
+const hasPublic = p => p.has('/public');
 const watchHandlers = [];
 const config = {
 	ignored: [/node_modules/, /package\.json/, /\.(git|idea|private|gitignore|lock)/] // /(^|[\/\\])\../,
@@ -22,14 +22,26 @@ const SELF = module.exports = {
 			watchHandlers.forEach(w => {
 				const isEventOK = w.event==='*' || w.event===event;
 				if(!isEventOK || !w.matcher(path)) return;
-				w.cb(path);
+				w.cb(path, event);
 			});
 		});
 
-		SELF.add(/\./, path => {
-			if(hasPublic(path)) {
-				$$$.io.emit('file-changed', path);
+		const timeStart = new Date().getTime();
+
+		SELF.add(/\./, '*', (path, event) => {
+			const timeNow = new Date().getTime();
+			const timeDiff = timeNow - timeStart;
+
+			if(event==='addDir' || path.has('_tmp_') || (event==='add' && timeDiff < 5000)) return;
+
+			if(event==='change' && hasPublic(path)) {
+				if(path.endsWith('.js')) {
+					$$$.mods.svWebpack.run();
+				} else {
+					$$$.io.emit('file-changed', path);
+				}
 			} else {
+				trace(path);
 				process.kill(process.pid);
 			}
 		});

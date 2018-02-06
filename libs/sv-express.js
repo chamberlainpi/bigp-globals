@@ -45,6 +45,8 @@ const SELF = module.exports = {
 
 			usedMP = true;
 
+			trace("Memory serving: " + url);
+
 			res.contentType(mime.lookup(mp));
 			res.send($$$.memFS.readFileSync(mp));
 		});

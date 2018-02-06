@@ -1,10 +1,5 @@
-require('colors');
-const _ = require('lodash');
+const _ = global._ = require('lodash');
 const cluster = require('cluster');
-
-const trace = console.log.bind(console);
-const traceClear = function() { process.stdout.write('\033c'); };
-const traceError = function(err) { trace(err.toString().red); };
 
 const mods = {};
 mods.crypto = require('crypto');
@@ -29,19 +24,24 @@ mods.webpack = require('webpack');
 mods.yargs = require('yargs');
 mods.MFS = require('memory-fs');
 
+const $$$ = new mods.events();
+
+require('colors');
+require('./libs/extensions').init($$$);
+
 const internalMods = [
 	mods.svYargs = require('./libs/sv-yargs'),
 	mods.svExpress = require('./libs/sv-express'),
 	mods.svWatcher = require('./libs/sv-watcher'),
 	mods.svSocketIO = require('./libs/sv-socket-io'),
 	mods.svAutoOpen = require('./libs/sv-auto-open'),
-	mods.svSassCompile = require('./libs/sv-sass-compile')
+	mods.svSassCompile = require('./libs/sv-sass-compile'),
+	mods.svWebpack = require('./libs/sv-webpack'),
 ];
 
-let isStarted = false;
-
-const $$$ = module.exports = {
+module.exports = _.extend($$$, {
 	memFS: new mods.MFS(),
+	isStarted: false,
 
 	init(opts) {
 		if(!opts) opts = {};
@@ -50,14 +50,9 @@ const $$$ = module.exports = {
 		const globals = $$$.globals = {};
 		globals._ = _;
 		globals.mods = $$$.mods = mods;
-		globals.trace = trace;
-		globals.traceClear = traceClear;
-		globals.traceError = traceError;
 
 		if(!opts.noConflict) _.extend(global, globals);
 		else trace("*noConflict* mode, use $$$.globals & $$$.globals.mods instead");
-
-		require('./libs/extensions');
 
 		$$$.paths = require('./libs/sv-paths');
 
@@ -81,8 +76,8 @@ const $$$ = module.exports = {
 	},
 
 	loopMasterProcess() {
-		if(isStarted) throw 'Already started a child-process!';
-		isStarted = true;
+		if($$$.isStarted) throw 'Already started a child-process!';
+		$$$.isStarted = true;
 
 		let persistent;
 
@@ -112,4 +107,4 @@ const $$$ = module.exports = {
 	builtInCommand() {
 		return 'built-in';
 	}
-};
+});
