@@ -14,8 +14,31 @@
 :floppy_disk: Install
 ---------------------
 
-Run this command in your CLI: `npm install bigp-globals`
+Run: `npm install bigp-globals`
 
+:rabbit2: Quick Start
+---------------------
+
+Once `npm` finishes its funky thing, you can start your app with a simple `app.js` file containing something like this:
+
+```javascript
+// Example in file "app.js"
+const $$$ = require('bigp-globals');
+
+$$$.init() // <-- Yes, this is a promise!
+  .then(status => trace(`Command returned: ${status}`.yellow))
+  .catch(err => traceError(err));
+```
+
+And then in your CLI:
+
+`node app.js`
+
+Optionally, you can specify a command, like this:
+ 
+`node app.js -c prod` ***(see options below)***
+
+You should then see some output indicating the Express server started. :clap: Congrats! :clap:
 
 :camera: Screenshots
 --------------------
@@ -45,30 +68,6 @@ This module basically sits in the background and provides a quick, effortless wa
 Simply because, overtime, I've noticed when I'm developing Web apps I'm rewriting the same code over and over, slightly differently, but usually behaving the same way in the end.
 
 **Coming from a Flash background**, I've never been a big fan of writing `console.log`, so I generally make an alias to it with a global `trace` variable. You're welcome, fellow AS3 devs :metal:
-
-:rabbit2: Quick Start
----------------------
-
-Once npm does its funky thing, you can start your app with a simple `app.js` file containing something like this:
-
-```javascript
-// Example in file "app.js"
-const $$$ = require('bigp-globals');
-
-$$$.init()
-  .then(status => trace(`Command returned: ${status}`.yellow))
-  .catch(err => traceError(err));
-```
-
-And then in your CLI:
-
-`node app.js`
-
-Optionally, you can specify a command, like this:
- 
-`node app.js -c prod` *(see options below)*
-
-You should then see some output indicating the Express server started. :clap: Congrats! :clap:
 
 :question: What's happening exactly?
 ------------------------------------
