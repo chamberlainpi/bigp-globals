@@ -1,15 +1,13 @@
-# :earth_americas: :earth_africa: :earth_asia: bigp-globals :earth_asia: :earth_africa: :earth_americas:
+bigp-globals
+============
 
 ***WARNING**: under construction, use at your own risk!*
 
-
 ![Confusion](https://github.com/bigp/bigp-globals/blob/master/readme-assets/confusion.png?raw=true "Confusion image")
-
 
  > So, you keep forgetting what you need to create a WebApp?
 
-
-***Well whadayaknow... me too!***
+:earth_americas: :earth_africa: :earth_asia: ***Well whadayaknow... me too!*** :earth_asia: :earth_africa: :earth_americas:
 
 :floppy_disk: Install
 ---------------------
