@@ -1,5 +1,13 @@
 @import "defaults.scss";
 
+.assistant {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background: #dde;
+}
 .header {
   padding: 10px;
   color: #fff;
@@ -17,7 +25,8 @@
 
 .frame {
   padding: 10px;
-  border: double 3px #000;
+  border: solid 3px #000;
+  border-radius: 30px;
 }
 
 $glowWhite: 0px 0px 8px rgba(255,255,255,1.0);
@@ -43,3 +52,12 @@ $glowWhite: 0px 0px 8px rgba(255,255,255,1.0);
     margin-right: 5px;
   }
 }
+
+.preview {
+  background: #fff;
+  display: block;
+  margin: 10px;
+  border: double 3px #888;
+}
+
+@import "overrides.scss";

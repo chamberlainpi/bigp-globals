@@ -1,6 +1,7 @@
 /**
  * Created by Chamberlain on 2/2/2018.
  */
+const fs = require('fs-extra');
 const mime = require('mime-types');
 const express = require('express');
 const app = express();
@@ -19,9 +20,9 @@ const SELF = module.exports = {
 		if(!opts.port) opts.port = 3333;
 		if(opts.isHelloWorld) app.get('/', (req, res) => res.send('Hello World!'));
 
-		app.get('/*', SELF.serveMemoryFile);
 		app.get('/*', SELF.serveStaticWithPreview($$$.paths.public));
 		app.get('/*', SELF.serveStaticWithPreview($$$.paths.internal.public));
+		app.get('/*', SELF.serveMemoryFile);
 		app.get('/js/extensions.js', SELF.serveFile(__dirname + '/extensions.js'));
 
 		if(opts.isAutoStart!==false) {
@@ -32,39 +33,39 @@ const SELF = module.exports = {
 		}
 	},
 
+	resolvePath(req, path) {
+		const url = req.url.split('?')[0];
+		return path + (url.endsWith('/') ? url + '/index.html' : url);
+	},
+
 	serveStaticWithPreview(path) {
 		const serveStatic = express.static(path);
+		const memFS = SELF.$$$.memFS;
 
 		return (req, res, next) => {
-			// const res_sendFile = res.sendFile;
-			// const res_send = res.send;
-			// const res_write = res.write;
-			// const res_end = res.end;
-			//
-			// _.assign(res, {
-			// 	sendFile() {
-			// 		trace("Sending file: " + arguments);
-			// 		res_sendFile.apply(res, arguments);
-			// 	},
-			// 	sendfile() {
-			// 		trace("Sending file: " + arguments);
-			// 		res_sendFile.apply(res, arguments);
-			// 	},
-			// 	send(a, b, c) {
-			// 		trace("Sending data: " + arguments);
-			// 		res_send.apply(res, arguments);
-			// 	},
-			// 	write() {
-			// 		trace("Writing data: " + arguments);
-			// 		res_write.apply(res, arguments);
-			// 	},
-			// 	end() {
-			// 		trace(_.keys(this));
-			// 		res_end.apply(res, arguments);
-			// 	}
-			// });
+			const url = new urlparse(req.get('referrer'), null, true);
+			const isPreview = url.query.preview || req.query.preview ? 'preview' : null;
 
-			//trace(path + req.url);
+			if(!isPreview) return serveStatic(req, res, next);
+
+			const filepath = SELF.resolvePath(req, path);
+			const filename = filepath.split('/').pop();
+			const mimeType = mime.lookup(filename);
+
+			const isFound = fs.existsSync(filepath) ? fs :
+				(memFS.existsSync(filepath) ? memFS : null);
+
+			if(isFound && mimeType.has('text/', '/javascript')) {
+				return isFound.readFile(filepath, 'utf8', onFileOpen);
+			}
+
+			function onFileOpen(err, content) {
+				var contentClean = content.replaceBetween(`[${isPreview}-start]`, `[${isPreview}-end]`)
+
+				res.contentType(mimeType);
+				res.send(contentClean);
+			}
+
 			serveStatic(req, res, next);
 		}
 	},
@@ -78,14 +79,10 @@ const SELF = module.exports = {
 			$$$.paths.internal.public + url
 		];
 
-		const urlObj = new urlparse(req.get('referer'), null, true);
-
 		memPaths.forEach(mp => {
 			if(usedMP || !mp.split('/').pop().has('.') || !$$$.memFS.existsSync(mp)) return;
 
 			usedMP = true;
-
-			//trace("Memory serving: " + url);
 
 			res.contentType(mime.lookup(mp));
 			res.send($$$.memFS.readFileSync(mp));

@@ -37,6 +37,7 @@ const internalMods = [
 	mods.svAutoOpen = require('./libs/sv-auto-open'),
 	mods.svSassCompile = require('./libs/sv-sass-compile'),
 	mods.svWebpack = require('./libs/sv-webpack'),
+	mods.sv1stTime = require('./libs/sv-1st-time'),
 ];
 
 module.exports = _.extend($$$, {

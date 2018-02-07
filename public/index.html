@@ -20,30 +20,46 @@
 </head>
 <body>
     <div id="app">
-        <!-- @remove-start -->
-        <div class="header">
-            <h1>Welcome to the WebApp Setup!</h1>
-        </div>
-
-        <div class="padded">
-            <span class="md">
-                To get started, click the following button to copy the template files over to your project.
-            </span>
-            <btn icon="copy" bgcolor="#f80" @click="copyProjectTemplate()">Copy Project Template</btn>
-        </div>
-        <!-- @remove-end -->
-
-        <div class="page">
-            <hr />
-            <!-- Insert your App HTML here -->
-            <btn icon="star-o">Test Button</btn>
-
-            <!-- Alternatively, use "routes" to make a Single-Page-App (SPA) -->
-            <p>Here's an example of a Route view:</p>
-            <div class="frame">
-                <router-view></router-view>
+        <!-- [preview-start] -->
+        <div class="assistant">
+            <div class="header">
+                <h1>Welcome to your WebApp Setup!</h1>
             </div>
+
+            <div class="padded">
+                <span class="md">
+                    To get started, click the following button to copy the template files over to your project folder.
+                </span>
+
+                <p>
+                    <btn class="padded-3" icon="copy" bgcolor="#f80" @click="copyTemplate()">Copy Template</btn>
+                    <a href="/?preview=1" target="_blank"><btn class="padded-3" icon="eye" bgcolor="#08f">Preview Template</btn></a>
+                </p>
+
+                <span class="md">
+                    Here's what the template looks like:
+                </span>
+            </div>
+
+            <div class="preview">
+                <!-- [preview-end] -->
+
+                <div class="page">
+                    <!-- Insert your App HTML here -->
+                    <btn icon="star-o">Test Button</btn>
+
+                    <!-- Alternatively, use "routes" to make a Single-Page-App (SPA) -->
+                    <p>Here's an example of a Route view:</p>
+                    <div class="frame">
+                        <router-view></router-view>
+                    </div>
+                </div>
+
+                <!-- [preview-start] -->
+            </div>
+
         </div>
+        <!-- [preview-end] -->
     </div>
 
     <script src="./bundle.js"></script>

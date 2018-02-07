@@ -10,7 +10,7 @@ export default {
 			//comp.template = `<div class="${compName}">${comp.template}</div>`;
 			_.extend(comp, {
 				mounted() {
-					this.$el.classList.add(compName)
+					this.$el.classList.add(compName);
 				}
 			});
 

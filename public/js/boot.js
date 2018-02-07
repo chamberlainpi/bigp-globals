@@ -10,21 +10,27 @@ $$$.showdown = new showdown.Converter({
 	emoji: true,
 });
 
-require('../../libs/extensions');
-require('./vendor/hot-reload');
-
+import '../../libs/extensions';
+import HotReload from './vendor/hot-reload';
 import VueTools from './vendor/vue-tools';
+
+HotReload();
 
 const DefaultComponents = {
 	'btn': {
-		props: ['icon', 'bgcolor'],
+		props: ['icon', 'bgcolor', 'href'],
 		data() {
 			return {
 				'bgcolor': '#0f8'
 			}
 		},
 		methods: {
-			click: function (e) { this.$emit('click', e); }
+			click(e) {
+				if(this.href) {
+					return window.location.href = this.href;
+				}
+				this.$emit('click', e);
+			}
 		},
 		template: `
 		<div :style="{background: bgcolor}" :class="'v-middle md-no ' + icon" @click="click">
@@ -45,8 +51,8 @@ const DefaultRoutes = {
 
 const DefaultMethods = {
 	methods: {
-		copyProjectTemplate() {
-			trace("OK!!!");
+		copyTemplate() {
+			$$$.io.emit('copy-template');
 		}
 	}
 }

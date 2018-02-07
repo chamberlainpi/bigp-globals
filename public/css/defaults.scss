@@ -29,8 +29,3 @@ code {
 }
 
 @mixin padded($p: 10px) { padding: $p; }
-
-.v-middle { vertical-align: middle; }
-.v-top {vertical-align: top; }
-.v-bottom {vertical-align: bottom; }
-.padded { @include padded; }
