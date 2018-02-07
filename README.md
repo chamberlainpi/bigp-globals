@@ -9,19 +9,29 @@ bigp-globals
  > So, you keep forgetting what you need to create a WebApp?
 
 
-***Well whattayaknow... me too!***
+***Well whadayaknow... me too!***
+
+Screenshots
+-----------
+
+First Time Setup:
+
+![First Time Setup](https://github.com/bigp/bigp-globals/blob/master/readme-assets/shot-1st-time.png?raw=true "First Time Setup image")
+
+Features
+--------
 
 This module basically sits in the background and provides a quick, effortless way to make WebApps.
 
 | Features | Included |
 | --- | --- |
-| Want to automatically open the 'localhost:3333' URL in your default browser when starting?<br/>(only when necessary / if not already opened) | :heavy_check_mark: | 
-| Present a User-Friendly startup guide on first launch in browser? | :heavy_check_mark: |
-| Hot-Reload on server & client code changes? | :heavy_check_mark: |
-| Serve JS, CSS, media files directly from your `/public` folder? | :heavy_check_mark: |
-| Compile front-end files with Webpack? | :heavy_check_mark: |
-| Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies? | :heavy_check_mark::heavy_check_mark::heavy_check_mark:<br/>:heavy_check_mark::heavy_check_mark::heavy_check_mark: |
-| Will this cause me headaches? | :x: | 
+| Show a User-Friendly startup guide for first time user experience? | :heavy_check_mark: |
+| Automatically open the 'localhost:3333' URL in your default browser when starting?<br/> *(only when it's not already opened)* | :heavy_check_mark: | 
+| Hot-Reload on server & client code changes?<br/> *(supports SCSS & CSS dynamic reloading)* | :heavy_check_mark: |
+| Serve files directly from your `/public/` folder?<br/> *(JS, CSS, media files, you name it!)* | :heavy_check_mark: |
+| Compile front-end files with Webpack?<br/> *(creates a `bundle.js` file)* | :heavy_check_mark: |
+| Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies?<br/> *(if you want to add/remove, edit the `index.html` file)*| :heavy_check_mark::heavy_check_mark::heavy_check_mark:<br/>:heavy_check_mark::heavy_check_mark::heavy_check_mark: |
+| **Okay, but will this cause me headaches?** | :x: | 
 
 Why?
 ----
@@ -59,7 +69,7 @@ You should then see some output indicating the Express server started.
 Congrats!
 
 What's happening exactly?
-----------------------------------
+-------------------------
  
  A *"Master cluster"* process starts up.
  It then loops every few milliseconds to ensure a child-process is running your actual webapp (express, socket.io, etc).
@@ -148,3 +158,14 @@ What it uses *under-the-hood*:
  - `chokidar`: used to detect file-changes and hot-reload/restart the child-server process automatically.
  - `socket.io`: handles the Client-Server communication.
  - `yargs`: parses the CLI arguments when launching the server with special parameters.
+ 
+ On the client side, it uses:
+ 
+ - `vue`: For layout, data-binding, client-router page updates, etc.
+ - `socket.io`: To communicate from/to the server.
+ - `GSAP TweenMax`: The best Web Animation library, hands down.
+ - `EaselJS`: A canvas-based drawing library (a-la-Flash).
+ - `Push`: Dispatches desktop notifications on server-refreshes.
+ - `Showdown`: To easily convert Markdown text to HTML (add `md` class to automatically parse your HTML tags) 
+ - `jQuery`: Because, of course! :smile:
+  
