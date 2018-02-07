@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="./css/defaults.css" hot-reload="1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/styles.css" hot-reload="1">
     <script> var $$$ = {}; </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
@@ -18,7 +19,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <!-- @remove-start -->
+        <div class="header">
+            <h1>Welcome to the WebApp Setup!</h1>
+        </div>
+
+        <div class="padded">
+            <span class="md">
+                To get started, click the following button to copy the template files over to your project.
+            </span>
+            <btn icon="copy" bgcolor="#f80" @click="copyProjectTemplate()">Copy Project Template</btn>
+        </div>
+        <!-- @remove-end -->
+
+        <div class="page">
+            <hr />
+            <!-- Insert your App HTML here -->
+            <btn icon="star-o">Test Button</btn>
+
+            <!-- Alternatively, use "routes" to make a Single-Page-App (SPA) -->
+            <p>Here's an example of a Route view:</p>
+            <div class="frame">
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
+
     <script src="./bundle.js"></script>
 </body>
 </html>

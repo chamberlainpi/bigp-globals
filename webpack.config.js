@@ -5,12 +5,12 @@ const trace = console.log.bind(console);
 
 module.exports = function($$$) {
 	const publicCustom = path.resolve($$$.paths.public, "js/entry.js");
-	const publicInternal = path.resolve($$$.paths.internal.public, "js/entry.js");
+	const publicInternal = path.resolve($$$.paths.internal.public, "js/boot.js");
 	let entries = [publicCustom, publicInternal];
 
 	entries = entries.filter(entry => fs.existsSync(entry));
 
-	trace("Existing entries:\n" + entries);
+	//trace("Existing entries:\n" + entries);
 
 	return {
 		entry: {

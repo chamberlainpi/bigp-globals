@@ -4,16 +4,22 @@
 var isRoutesUsed = false;
 
 export default {
-	init(components, routesObj) {
+	init(components, routesObj, moreOptions) {
 		_.keys(components).forEach(compName => {
 			const comp = components[compName];
-			comp.template = `<div class="${compName}">${comp.template}</div>`;
+			//comp.template = `<div class="${compName}">${comp.template}</div>`;
+			_.extend(comp, {
+				mounted() {
+					this.$el.classList.add(compName)
+				}
+			});
+
 			Vue.component(compName, comp);
 		});
 
 		const router = this.createRoutes(routesObj);
 
-		$$$.vue = new Vue({el: '#app', router: router, template: '<app />'});
+		$$$.vue = new Vue(_.extend({el: '#app', router: router}, moreOptions));
 	},
 
 	createRoutes(routesObj, opts) {

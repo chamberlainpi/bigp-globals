@@ -329,7 +329,7 @@
 /// @param {Size} $blur [2px] - Blur
 /// @param {Color} $color [rgba(0,0,0,.4)] - Color
 
-@mixin text-shadow($params) {
+@mixin text-shadow($params...) {
   @include css3-prefix('text-shadow', $params);
 }
 

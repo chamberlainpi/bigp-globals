@@ -19,7 +19,6 @@ const SELF = module.exports = {
 
 		compiler.inputFileSystem = fs;
 		compiler.outputFileSystem = $$$.memFS;
-		//compiler.resolvers.normal.fileSystem = $$$.memFS;
 
 		this.run();
 	},

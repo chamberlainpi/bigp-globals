@@ -11,14 +11,20 @@ const SELF = module.exports = {
 		$$$.mods.svWatcher.add(sassRegex, '*', path => renderInMemory(path));
 
 		const cssShared = $$$.paths.internal.public + '/css';
+		const cssStyles = $$$.paths.public + '/css/styles.scss';
+		const cssInternal = cssShared + '/styles.scss';
+
+		const cssEntries = [cssStyles, cssInternal];
 
 		function renderInMemory(dir) {
-			const cssPath = path.resolve(dir.replace(sassRegex, '.css')).fixSlash();
-			const cssDir = cssPath.toPath().dir;
+			const cssEntry = cssEntries.find(entry => fs.existsSync(entry));
+			if(!cssEntry) throw 'No CSS entry found.';
 
-			$$$.memFS.mkdirpSync(cssDir);
+			const cssPath = path.resolve(cssEntry.replace(sassRegex, '.css')).fixSlash();
 
-			sass.render({file: dir, includePaths: [cssShared]},
+			$$$.memFS.mkdirpSync(cssPath.toPath().dir);
+
+			sass.render({file: cssEntry, includePaths: [cssShared]},
 				(err, result) => {
 					if(err) throw err;
 

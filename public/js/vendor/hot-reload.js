@@ -4,8 +4,13 @@ function checkConnection() {
 	$$$.io.emit('check', true);
 }
 
-$$$.io.on('already-opened', () => {
+
+function flashEverything() {
 	TweenMax.fromTo(document.body, 0.5, {alpha:0}, {alpha:1});
+}
+
+$$$.io.on('already-opened', () => {
+	flashEverything();
 
 	Push.create("WebApp Already Opened!", {
 		body: "Click here to open it.",
@@ -30,6 +35,8 @@ $$$.io.on('file-changed', path => {
 			$('link[hot-reload]').each((i, link) => {
 				link.href = link.href.split('?')[0] + "?id=" + $$$.randID();
 			});
+
+			flashEverything();
 			break;
 		default:
 			window.location.reload(true);
