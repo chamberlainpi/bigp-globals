@@ -11,6 +11,12 @@
 
 ***Well whadayaknow... me too!***
 
+:floppy_disk: Install
+---------------------
+
+Run this command in your CLI: `npm install bigp-globals`
+
+
 :camera: Screenshots
 --------------------
 
@@ -43,8 +49,6 @@ Simply because, overtime, I've noticed when I'm developing Web apps I'm rewritin
 :rabbit2: Quick Start
 ---------------------
 
-To get started, install it via `npm install @bigp/bigp-globals`
-
 Once npm does its funky thing, you can start your app with a simple `app.js` file containing something like this:
 
 ```javascript
@@ -64,9 +68,7 @@ Optionally, you can specify a command, like this:
  
 `node app.js -c prod` *(see options below)*
 
-You should then see some output indicating the Express server started.
-
-:clap: :clap: :clap: Congrats! :clap: :clap: :clap:
+You should then see some output indicating the Express server started. :clap: Congrats! :clap:
 
 :question: What's happening exactly?
 ------------------------------------
@@ -74,7 +76,7 @@ You should then see some output indicating the Express server started.
  A *"Master cluster"* process starts up.
  It then loops every few milliseconds to ensure a child-process is running your actual webapp (express, socket.io, etc).
  
- This ensures that whenever the child-process kills itself (:running_man::gun: how dark!) from a server-side file modification, the Master process simply relaunches it immediately.
+ This ensures that whenever the child-process kills itself from a server-side file modification (:running_man::gun: how dark!), the Master process simply relaunches it immediately.
  
  The *File-Watcher* system is also responsible for differentiating between modifications applied to server-side, front-end JS, CSS, media files, and webpacked source files to notify and/or kill the respective event or process.
  This way, whenever possible, it attempts to `hot-reload` dynamic resources (ex: CSS stylesheets) without doing a full page-refresh.  
