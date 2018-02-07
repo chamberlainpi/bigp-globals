@@ -1,5 +1,5 @@
-bigp-globals
-============
+# :earth_americas: :earth_africa: :earth_asia: bigp-globals :earth_asia: :earth_africa: :earth_americas:
+
 ***WARNING**: under construction, use at your own risk!*
 
 
@@ -18,8 +18,8 @@ First Time Setup:
 
 ![First Time Setup](https://github.com/bigp/bigp-globals/blob/master/readme-assets/shot-1st-time.png?raw=true "First Time Setup image")
 
-Features
---------
+:heavy_check_mark: Features
+---------------------------
 
 This module basically sits in the background and provides a quick, effortless way to make WebApps.
 
