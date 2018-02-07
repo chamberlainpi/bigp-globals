@@ -11,8 +11,8 @@ bigp-globals
 
 ***Well whadayaknow... me too!***
 
-Screenshots
------------
+:camera: Screenshots
+--------------------
 
 First Time Setup:
 
@@ -31,17 +31,17 @@ This module basically sits in the background and provides a quick, effortless wa
 | Serve files directly from your `/public/` folder?<br/> *(JS, CSS, media files, you name it!)* | :heavy_check_mark: |
 | Compile front-end files with Webpack?<br/> *(creates a `bundle.js` file)* | :heavy_check_mark: |
 | Include jQuery, lodash, Vue, socket.io, HowlerJS, and other goodies?<br/> *(if you want to add/remove, edit the `index.html` file)*| :heavy_check_mark::heavy_check_mark::heavy_check_mark:<br/>:heavy_check_mark::heavy_check_mark::heavy_check_mark: |
-| **Okay, but will this cause me headaches?** | :x: | 
+| **Okay, but will this cause me headaches?** | :x: :sweat_smile: | 
 
-Why?
-----
+:raising_hand: Why?
+-------------------
 
 Simply because, overtime, I've noticed when I'm developing Web apps I'm rewriting the same code over and over, slightly differently, but usually behaving the same way in the end.
 
-**Coming from a Flash background**, I've never been a big fan of writing `console.log`, so I generally make an alias to it with a global `trace` variable. You're welcome, fellow AS3 devs ;)
+**Coming from a Flash background**, I've never been a big fan of writing `console.log`, so I generally make an alias to it with a global `trace` variable. You're welcome, fellow AS3 devs :metal:
 
-Quick Start
------------
+:rabbit2: Quick Start
+---------------------
 
 To get started, install it via `npm install @bigp/bigp-globals`
 
@@ -66,10 +66,10 @@ Optionally, you can specify a command, like this:
 
 You should then see some output indicating the Express server started.
 
-Congrats!
+:clap: :clap: :clap: Congrats! :clap: :clap: :clap:
 
-What's happening exactly?
--------------------------
+:question: What's happening exactly?
+------------------------------------
  
  A *"Master cluster"* process starts up.
  It then loops every few milliseconds to ensure a child-process is running your actual webapp (express, socket.io, etc).
@@ -79,8 +79,8 @@ What's happening exactly?
  The *File-Watcher* system is also responsible for differentiating between modifications applied to server-side, front-end JS, CSS, media files, and webpacked source files to notify and/or kill the respective event or process.
  This way, whenever possible, it attempts to `hot-reload` dynamic resources (ex: CSS stylesheets) without doing a full page-refresh.  
 
-Options
--------
+:page_with_curl: Options
+------------------------
 
 You can configure the module by passing an **options** object to the `init({...})` method.
 
@@ -138,10 +138,12 @@ Easy fix, just set: ``$$$.init({noConflict: true})``
 Although `noConflict` takes care of some global conflicts,
 there may be some extensions applied to the built-in Javascript types.
 All I have to say about that is:
-I really hope they won't conflict with your codebase, because they're designed to provide convenience methods used internally AND by the various web-apps created with this module. #BuiltInExtensionsLivesMatters, right? :grinning: 
+I really hope they won't conflict with your codebase, because they're designed to provide convenience methods used internally AND by the various web-apps created with this module.
 
-The Promise of `$$$.init(...)`
--------------------------------
+**#BuiltInExtensionsLivesMatters**, right? :grinning: 
+
+:raised_hands: The Promise of `$$$.init(...)`
+---------------------------------------------
 Once the module is initialized, it returns a Promise object.
 
 The result passed in the resolved `then((result) => {...})` 
@@ -149,8 +151,8 @@ callback should be the *command* name passed with the `-c or --command` CLI argu
 
 You may want to add a `catch` callback as well to pickup any potential internal issues during startup / runtime.
 
-Dependencies
-------------
+:family: Dependencies
+---------------------
 
 What it uses *under-the-hood*:
 
