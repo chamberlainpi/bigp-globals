@@ -10,7 +10,16 @@ const SELF = module.exports = {
 	init($$$) {
 		$$$.mods.svSocketIO.addEvent('copy-template', copyFiles);
 
-		function copyFiles() {
+		function copyFiles(opts) {
+			if(!opts) opts = {};
+			if(opts.isTesting) {
+				trace('TESTING COPY-TEMPLATE.');
+				setTimeout(() => {
+					$$$.io.emit('file-changed');
+				}, 2000);
+				return
+			}
+
 			const files = templateFiles.files;
 
 			files.forEach( file => {

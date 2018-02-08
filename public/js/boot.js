@@ -32,10 +32,40 @@ const DefaultComponents = {
 				this.$emit('click', e);
 			}
 		},
-		template: `
-		<div :style="{background: bgcolor}" :class="'v-middle md-no ' + icon" @click="click">
-			<i :class="'fa fa-'+icon"></i><slot></slot>
-		</div>`
+		template:
+			`<div :style="{background: bgcolor}" :class="'v-middle md-no ' + icon" @click="click">
+				<i :class="'fa fa-'+icon"></i><slot></slot>
+			</div>`
+	},
+
+	'spinner': {
+		props: ['size'],
+		data() {
+			return {
+				size: 1
+			}
+		},
+
+		computed: {
+			scaleSize() {
+				return `scale(${this.size})`;
+			}
+		},
+
+		methods: {
+			show(speed=0.8) {
+				const el = this.$el;
+				$(el).show();
+
+				TweenMax.killTweensOf(el);
+				TweenMax.to(el, speed, {rotation: '+=360', repeat:-1, ease: Linear.easeNone});
+			}
+		},
+
+		template:
+			`<div>
+				<img src="images/spinner.png" :style="{ transform: scaleSize }">
+			</div>`
 	}
 };
 
@@ -53,9 +83,17 @@ const DefaultMethods = {
 	methods: {
 		copyTemplate() {
 			$$$.io.emit('copy-template');
+			$$$.vueOf('#main-spinner').show();
+			TweenMax.to($$$.app, 0.3, {alpha:0.5});
 		}
 	}
-}
+};
+
+$$$.vueOf = function(el) {
+	if(_.isString(el)) el = $(el);
+	if(el instanceof jQuery) el = el[0];
+	return el.__vue__;
+};
 
 $(document).ready(() => {
 	const READY = {

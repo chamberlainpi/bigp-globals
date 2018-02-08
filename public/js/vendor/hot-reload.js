@@ -25,7 +25,7 @@ export default function() {
 	});
 
 	$$$.io.on('file-changed', path => {
-		const ext = path.split('.').pop().toLowerCase();
+		const ext = (path || '').split('.').pop().toLowerCase();
 
 		switch(ext) {
 			case 'ts':

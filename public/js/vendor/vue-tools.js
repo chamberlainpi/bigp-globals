@@ -20,6 +20,7 @@ export default {
 		const router = this.createRoutes(routesObj);
 
 		$$$.vue = new Vue(_.extend({el: '#app', router: router}, moreOptions));
+		$$$.app = $('#app');
 	},
 
 	createRoutes(routesObj, opts) {

@@ -7,3 +7,20 @@
 .padded-3 { @include padded(30px); }
 .padded-4 { @include padded(40px); }
 .padded-5 { @include padded(50px); }
+
+.abs { position: absolute; }
+.fixed { position: fixed; }
+.centered {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner {
+  //Fix for spinner's origin offset:
+  transform-origin: 50% 49.5%;
+}
+
+.init-hidden {
+  display: none;
+}
