@@ -9,7 +9,7 @@ function init($$$) {
 	GLOBALS.trace = console.log.bind(console);
 	GLOBALS.traceError = console.error.bind(console);
 	GLOBALS.traceClear = isNode ?
-		function() { process.stdout.write('\033c'); } :
+		function() { process.stdout.write('\x1Bc'); } :
 		console.clear.bind(console);
 
 	_.extend(String.prototype, {

@@ -4,13 +4,9 @@ const path = require('path');
 const trace = console.log.bind(console);
 
 module.exports = function($$$) {
-	const publicCustom = path.resolve($$$.paths.public, "js/entry.js");
-	const publicInternal = path.resolve($$$.paths.internal.public, "js/boot.js");
-	let entries = [publicCustom, publicInternal];
-
-	entries = entries.filter(entry => fs.existsSync(entry));
-
-	//trace("Existing entries:\n" + entries);
+	const entryMain = path.resolve($$$.paths.public, "js/entry.js");
+	const entryInternal = path.resolve($$$.paths.internal.public, "js/boot.js");
+	const entries = [entryMain, entryInternal].filter(fs.existsSync);
 
 	return {
 		entry: {
@@ -20,13 +16,6 @@ module.exports = function($$$) {
 		output: {
 			path: path.resolve(__dirname, "./public"),
 			filename: "[name].js"
-		},
-
-		devServer: {
-			publicPath: "/public",
-			contentBase: "./web-dashboard",
-			hot: false,
-			inline: false
 		},
 
 		module: {

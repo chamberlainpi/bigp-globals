@@ -3,19 +3,19 @@
  */
 const fs = require('fs-extra');
 const webpack = require('webpack');
-const webpackConfig = require('../webpack.config');
 
 const SELF = module.exports = {
 	init($$$) {
+		const webpackConfig = require('../webpack.config');
 		const cfg = SELF.config = webpackConfig($$$);
 		const output = cfg.output;
-		const compiler = webpack(SELF.config);
+		const compiler = webpack(cfg);
 
-		$$$.webpack = compiler;
+		SELF.webpack = compiler;
 
 		SELF.$$$ = $$$;
 		SELF.compiler = compiler;
-		SELF.outputFilename = output.path.mustEndWith('/').fixSlash() + output.filename;
+		SELF.fileChanged = output.path.mustEndWith('/').fixSlash() + output.filename;
 
 		compiler.inputFileSystem = fs;
 		compiler.outputFileSystem = $$$.memFS;
@@ -37,7 +37,7 @@ const SELF = module.exports = {
 				const size = (asset.size/1024).toFixed(2);
 				trace([" WEBPACK OK ".bgGreen.white, ` ${size}kb `.bgMagenta.white, asset.name].join(' '));
 
-				SELF.$$$.io.emit('file-changed', SELF.outputFilename);
+				SELF.$$$.io.emit('file-changed', SELF.fileChanged);
 
 				_then(stats);
 			});
