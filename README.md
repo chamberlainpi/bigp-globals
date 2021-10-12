@@ -139,8 +139,6 @@ there may be some extensions applied to the built-in Javascript types.
 All I have to say about that is:
 I really hope they won't conflict with your codebase, because they're designed to provide convenience methods used internally AND by the various web-apps created with this module.
 
-**#BuiltInExtensionsLivesMatters**, right? :grinning: 
-
 :raised_hands: The Promise of `$$$.init(...)`
 ---------------------------------------------
 Once the module is initialized, it returns a Promise object.
